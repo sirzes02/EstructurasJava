@@ -1,4 +1,4 @@
-package listasDobles
+package listasDobles.kotlin
 
 class Node(var id: String) {
     var next: Node? = null

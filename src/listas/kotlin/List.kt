@@ -1,4 +1,4 @@
-package listas
+package listas.kotlin
 
 class Node(var id: String) {
     var next: Node? = null

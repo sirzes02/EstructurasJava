@@ -1,4 +1,4 @@
-package listasDobles
+package listasDobles.kotlin
 
 fun main() {
     var option: Int
