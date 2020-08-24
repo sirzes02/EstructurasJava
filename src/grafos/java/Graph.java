@@ -86,7 +86,9 @@ public class Graph {
             edgeAux = vertexAux.getAdjacent();
 
             while (edgeAux != null) {
-                System.out.println(edgeAux.getAdjacent().getName() + "->");
+                if (edgeAux.getAdjacent() != null) {
+                    System.out.print(edgeAux.getAdjacent().getName() + "->");
+                }
 
                 edgeAux = edgeAux.getNext();
             }
@@ -98,16 +100,10 @@ public class Graph {
     }
 
     public void cancel() {
-        Vertex aux;
-
-        while (h != null) {
-            aux = h;
-            h = h.getNext();
-            //delete(aux)
-        }
+        h = null;
     }
 
-    private void removeEdge(Vertex origin, Vertex destiny) {
+    public void removeEdge(Vertex origin, Vertex destiny) {
         Edge current = origin.getAdjacent();
         boolean flag = false;
 
@@ -115,8 +111,6 @@ public class Graph {
             System.out.println("The origin vertex have no edges.");
         } else if (current.getAdjacent() == destiny) {
             origin.setAdjacent(current.getNext());
-
-            //delete(current);
         } else {
             Edge before = null;
 
@@ -125,7 +119,6 @@ public class Graph {
                     flag = true;
                     assert before != null;
                     before.setNext(current.getNext());
-                    //delete(current);
                     break;
                 }
 
@@ -162,8 +155,6 @@ public class Graph {
 
         if (vert == h) {
             h = h.getNext();
-
-            //delete(current)
         } else {
             Vertex before = null;
 
@@ -173,7 +164,6 @@ public class Graph {
             }
 
             before.setNext(current.getNext());
-            //delete(current)
         }
     }
 
@@ -197,7 +187,7 @@ public class Graph {
                 }
             }
 
-            if (!flag) {
+            if (!flag && current != null) {
                 System.out.print(current.getName() + ", ");
                 currentList.add(current);
 
@@ -243,7 +233,7 @@ public class Graph {
                 }
             }
 
-            if (!flag) {
+            if (!flag && current != null) {
                 System.out.print(current.getName() + ", ");
                 currentList.add(current);
 
@@ -430,10 +420,10 @@ public class Graph {
         orderList.add(new PairVertexWeight(origin, 0));
 
         while (!orderList.isEmpty()) {
-            currentVertex = orderList.get(0).getOrigin();
-            currentCost = orderList.get(0).getWeight();
+            currentVertex = orderList.get(orderList.size() - 1).getOrigin();
+            currentCost = orderList.get(orderList.size() - 1).getWeight();
 
-            orderList.remove(0);
+            orderList.remove(orderList.size() - 1);
 
             if (currentVertex == destiny) {
                 System.out.println("Cost: " + currentCost);
