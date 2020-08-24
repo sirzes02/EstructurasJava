@@ -23,12 +23,8 @@ fun main() {
 
                 miList.insert(auxId)
             }
-            2 -> {
-                miList.showASC()
-            }
-            3 -> {
-                miList.showDSC()
-            }
+            2 -> miList.showASC()
+            3 -> miList.showDSC()
             4 -> {
                 println("Insert a ID to update:")
                 auxId = readLine()!!
