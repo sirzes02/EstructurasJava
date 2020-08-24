@@ -1,7 +1,5 @@
 package listasDobles
 
-const val CLEAR = "\u001b[H\u001b[2J"
-
 class Node(var id: String, var next: Node? = null, var before: Node? = null)
 
 var head: Node? = null
@@ -12,7 +10,6 @@ fun main() {
     var auxId: String
 
     do {
-        print(listas.CLEAR)
 
         println("Menu:")
         println("1. Insert.")
@@ -23,10 +20,6 @@ fun main() {
         println("6. Exit.")
         println("Choose a option:")
         option = readLine()!!.toInt()
-
-        print(CLEAR)
-
-        print(listas.CLEAR)
 
         when (option) {
             1 -> {
