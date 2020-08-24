@@ -5,23 +5,23 @@ import kotlin.Pair;
 import java.util.*;
 
 public class Graph {
-    private Vertex h;
+    private Vertex first;
 
     public Graph() {
-        h = null;
+        first = null;
     }
 
     public void initialize() {
-        h = null;
+        first = null;
     }
 
     public boolean empty() {
-        return h == null;
+        return first == null;
     }
 
     public int size() {
         int cont = 0;
-        Vertex aux = h;
+        Vertex aux = first;
 
         while (aux != null) {
             cont++;
@@ -32,7 +32,7 @@ public class Graph {
     }
 
     public Vertex getVertex(String name) {
-        Vertex aux = h;
+        Vertex aux = first;
 
         while (aux != null) {
             if (aux.getName().equals(name)) {
@@ -49,9 +49,9 @@ public class Graph {
         Vertex newVertex = new Vertex(name);
 
         if (empty()) {
-            h = newVertex;
+            first = newVertex;
         } else {
-            Vertex aux = h;
+            Vertex aux = first;
 
             while (aux.getNext() != null) {
                 aux = aux.getNext();
@@ -78,7 +78,7 @@ public class Graph {
     }
 
     public void adjacentList() {
-        Vertex vertexAux = h;
+        Vertex vertexAux = first;
         Edge edgeAux;
 
         while (vertexAux != null) {
@@ -100,7 +100,7 @@ public class Graph {
     }
 
     public void cancel() {
-        h = null;
+        first = null;
     }
 
     public void removeEdge(Vertex origin, Vertex destiny) {
@@ -133,7 +133,7 @@ public class Graph {
     }
 
     public void removeVertex(Vertex vert) {
-        Vertex current = h;
+        Vertex current = first;
         Edge aux;
 
         while (current != null) {
@@ -151,10 +151,10 @@ public class Graph {
             current = current.getNext();
         }
 
-        current = h;
+        current = first;
 
-        if (vert == h) {
-            h = h.getNext();
+        if (vert == first) {
+            first = first.getNext();
         } else {
             Vertex before = null;
 
