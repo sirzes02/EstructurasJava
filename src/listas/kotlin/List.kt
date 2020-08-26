@@ -65,8 +65,7 @@ class List {
 
             if (searchId != null) {
                 if (searchId == list) {
-                    val aux: Node? = list!!.next
-                    list = aux
+                    list = list!!.next
                 } else {
                     var current = list
                     var before: Node? = null

@@ -1,9 +1,9 @@
 package listas.kotlin
 
 fun main() {
-    var option: Int
-    var auxId: String
     val miList = List()
+    var auxId: String
+    var option: Int
 
     do {
         println("Menu:")
