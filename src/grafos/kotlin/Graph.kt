@@ -90,15 +90,19 @@ class Graph {
     fun adjacentList() {
         var vertexAux = first
         var edgeAux: Edge?
+
         while (vertexAux != null) {
             print(vertexAux.name + "->")
             edgeAux = vertexAux.adjacent
+
             while (edgeAux != null) {
                 if (edgeAux.adjacent != null) {
                     print(edgeAux.adjacent!!.name + "->")
                 }
+
                 edgeAux = edgeAux.next
             }
+
             vertexAux = vertexAux.next
             println()
         }
@@ -111,12 +115,14 @@ class Graph {
     fun removeEdge(origin: Vertex, destiny: Vertex) {
         var current = origin.adjacent
         var flag = false
+
         if (current == null) {
             println("The origin vertex have no edges.")
         } else if (current.adjacent === destiny) {
             origin.adjacent = current.next
         } else {
             var before: Edge? = null
+
             while (current != null) {
                 if (current.adjacent === destiny) {
                     flag = true
@@ -124,9 +130,11 @@ class Graph {
                     before!!.next = current.next
                     break
                 }
+
                 before = current
                 current = current.next
             }
+
             if (!flag) {
                 println("Those two vertices aren't connected.")
             }
@@ -136,26 +144,34 @@ class Graph {
     fun removeVertex(vert: Vertex) {
         var current = first
         var aux: Edge?
+
         while (current != null) {
             aux = current.adjacent
+
             while (aux != null) {
                 if (aux.adjacent === vert) {
                     removeEdge(current, aux.adjacent!!)
                     break
                 }
+
                 aux = aux.next
             }
+
             current = current.next
         }
+
         current = first
+
         if (vert === first) {
             first = first!!.next
         } else {
             var before: Vertex? = null
+
             while (current !== vert) {
                 before = current
                 current = current!!.next
             }
+
             before!!.next = current.next
         }
     }
@@ -166,31 +182,41 @@ class Graph {
         val currentList: MutableList<Vertex> = LinkedList()
         var flag: Boolean
         var flag2: Boolean
+
         currentQueue.add(origin)
+
         while (!currentQueue.isEmpty()) {
             flag = false
             current = currentQueue.poll()
+
             for (vertex in currentList) {
                 if (vertex === current) {
                     flag = true
                     break
                 }
             }
+
             if (!flag && current != null) {
                 print(current.name + ", ")
+
                 currentList.add(current)
+
                 var aux = current.adjacent
+
                 while (aux != null) {
                     flag2 = false
+
                     for (vertex in currentList) {
                         if (aux.adjacent === vertex) {
                             flag2 = true
                             break
                         }
                     }
+
                     if (!flag2) {
                         currentQueue.add(aux.adjacent)
                     }
+
                     aux = aux.next
                 }
             }
@@ -203,31 +229,41 @@ class Graph {
         val currentList: MutableList<Vertex> = LinkedList()
         var flag: Boolean
         var flag2: Boolean
+
         currentStack.push(origin)
+
         while (!currentStack.empty()) {
             flag = false
             current = currentStack.pop()
+
             for (vertex in currentList) {
                 if (vertex === current) {
                     flag = true
                     break
                 }
             }
+
             if (!flag && current != null) {
                 print(current.name + ", ")
+
                 currentList.add(current)
+
                 var aux = current.adjacent
+
                 while (aux != null) {
                     flag2 = false
+
                     for (vertex in currentList) {
                         if (aux.adjacent === vertex) {
                             flag2 = true
                             break
                         }
                     }
+
                     if (!flag2) {
                         currentStack.push(aux.adjacent)
                     }
+
                     aux = aux.next
                 }
             }
@@ -244,45 +280,59 @@ class Graph {
         var flag: Boolean
         var flag2: Boolean
         var flag3 = false
+
         currentQueue.add(origin)
+
         while (!currentQueue.isEmpty()) {
             flag = false
             current = currentQueue.poll()
+
             for (vertex in currentList) {
                 if (current === vertex) {
                     flag = true
                     break
                 }
             }
+
             if (!flag) {
                 if (current === destiny) {
                     flag3 = true
                     currentDestiny = destiny
+
                     while (!currentStack.isEmpty()) {
                         print(currentDestiny.name + "<-")
+
                         while (!currentStack.empty() && currentStack.peek().component2() !== currentDestiny) {
                             currentStack.pop()
                         }
+
                         if (!currentStack.empty()) {
                             currentDestiny = currentStack.peek().component1()
                         }
                     }
+
                     break
                 }
+
                 currentList.add(current)
+
                 aux = current.adjacent
+
                 while (aux != null) {
                     flag2 = false
+
                     for (vertex in currentList) {
                         if (aux.adjacent === vertex) {
                             flag2 = true
                             break
                         }
                     }
+
                     if (!flag2) {
                         currentQueue.add(aux.adjacent)
                         currentStack.push(Pair(current, aux.adjacent!!))
                     }
+
                     aux = aux.next
                 }
             }
@@ -302,45 +352,59 @@ class Graph {
         var flag: Boolean
         var flag2: Boolean
         var flag3 = false
+
         currentStack.push(origin)
+
         while (!currentStack.empty()) {
             flag = false
             currentVertex = currentStack.pop()
+
             for (vertex in currentList) {
                 if (currentVertex === vertex) {
                     flag = true
                     break
                 }
             }
+
             if (!flag) {
                 if (currentVertex === destiny) {
                     flag3 = true
                     currentDestiny = destiny
+
                     while (!currentStackPair.empty()) {
                         print(currentDestiny.name + "<-")
+
                         while (!currentStackPair.empty() && currentStackPair.peek().component2() !== currentDestiny) {
                             currentStackPair.pop()
                         }
+
                         if (!currentStackPair.empty()) {
                             currentDestiny = currentStackPair.peek().component1()
                         }
                     }
+
                     break
                 }
+
                 currentList.add(currentVertex)
+
                 aux = currentVertex.adjacent
+
                 while (aux != null) {
                     flag2 = false
+
                     for (vertex in currentList) {
                         if (aux.adjacent === vertex) {
                             flag2 = true
                             break
                         }
                     }
+
                     if (!flag2) {
                         currentStack.push(aux.adjacent)
                         currentStackPair.push(Pair(currentVertex, aux.adjacent!!))
                     }
+
                     aux = aux.next
                 }
             }
@@ -360,18 +424,24 @@ class Graph {
         var currentCost: Int
         var flag: Boolean
         var flag2 = false
+
         costsList.add(PairVertexWeight(origin!!, 0))
         orderList.add(PairVertexWeight(origin, 0))
+
         while (orderList.isNotEmpty()) {
             currentVertex = orderList[orderList.size - 1].origin
             currentCost = orderList[orderList.size - 1].weight
             orderList.removeAt(orderList.size - 1)
+
             if (currentVertex === destiny) {
                 println("Cost: $currentCost")
+
                 flag2 = true
                 currentDestiny = destiny
+
                 while (!currentStack.empty()) {
                     println(currentDestiny.name + "<-")
+
                     while (!currentStack.empty() && currentStack.peek().component2() !== currentDestiny) {
                         currentStack.pop()
                     }
@@ -379,22 +449,29 @@ class Graph {
                         currentDestiny = currentStack.peek().component1()
                     }
                 }
+
                 break
             }
+
             aux = currentVertex.adjacent
+
             while (aux != null) {
                 flag = false
                 currentCost += aux.weight
+
                 for (vertexWeight in costsList) {
                     if (aux.adjacent === vertexWeight.origin) {
                         flag = true
+
                         if (currentCost < vertexWeight.weight) {
                             vertexWeight.weight = currentCost
+
                             for (pairVertexWeight in orderList) {
                                 if (pairVertexWeight.origin === aux.adjacent) {
                                     pairVertexWeight.weight = currentCost
                                 }
                             }
+
                             orderList.sortWith(Comparator.comparingInt { obj: PairVertexWeight -> obj.weight })
                             currentStack.push(Pair(currentVertex, aux.adjacent!!))
                             currentCost -= aux.weight
@@ -408,6 +485,7 @@ class Graph {
                     currentStack.push(Pair(currentVertex, aux.adjacent!!))
                     currentCost -= aux.weight
                 }
+
                 aux = aux.next
             }
         }

@@ -2,12 +2,13 @@ package grafos.kotlin
 
 fun main() {
     val miGraph = Graph()
-    miGraph.initialize()
-    var option: Int
     var name: String
     var origin: String
     var destiny: String
+    var option: Int
     var weight: Int
+
+    miGraph.initialize()
 
     miGraph.insertVertex("afghanistan")
     miGraph.insertVertex("albania")

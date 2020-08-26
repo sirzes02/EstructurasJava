@@ -4,14 +4,15 @@ import java.util.Scanner;
 
 public class Grafo {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         Graph miGraph = new Graph();
-        miGraph.initialize();
-        int option;
         String name;
         String origin;
         String destiny;
+        int option;
         int weight;
-        Scanner sc = new Scanner(System.in);
+
+        miGraph.initialize();
 
         miGraph.insertVertex("afghanistan");
         miGraph.insertVertex("albania");
